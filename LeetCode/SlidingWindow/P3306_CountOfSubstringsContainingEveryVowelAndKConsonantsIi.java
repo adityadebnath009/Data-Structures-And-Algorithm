@@ -25,7 +25,7 @@ public class P3306_CountOfSubstringsContainingEveryVowelAndKConsonantsIi {
     }
 
     // TODO: Write solution method here
-    class Solution {
+
         public boolean isVowel(char ch)
         {
             return ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u';
@@ -107,5 +107,5 @@ public class P3306_CountOfSubstringsContainingEveryVowelAndKConsonantsIi {
             }
             return res;
         }
-    }
+
 }

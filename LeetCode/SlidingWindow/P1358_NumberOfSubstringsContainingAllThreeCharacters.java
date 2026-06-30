@@ -40,7 +40,6 @@ public class P1358_NumberOfSubstringsContainingAllThreeCharacters {
 
 
     // TODO: Write solution method here
-    class Solution {
         public int numberOfSubstrings(String s) {
 
             int len = s.length();
@@ -70,5 +69,5 @@ public class P1358_NumberOfSubstringsContainingAllThreeCharacters {
             return res;
 
         }
-    }
+
 }
