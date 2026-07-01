@@ -7,11 +7,19 @@
  * Link: https://leetcode.com/problems/find-the-safest-path-in-a-grid/
  * 
  * Complexity:
- * - Time Complexity: O(N)
- * - Space Complexity: O(1)
+ * - Time Complexity: O(n^2*logn)
+ * - Space Complexity: O(n^2)
  * 
  * Approach:
  * // TODO: Describe your approach here
+ *  The core idea
+ *
+ * This solution is really two algorithms working together:
+ *
+ * Multi-source BFS → Precompute dist[i][j], the distance from each cell to its nearest thief.
+ * Modified Dijkstra (Maximum Bottleneck Path) → Find a path from (0,0) to (n-1,n-1) that maximizes the minimum dist value encountered along the path.
+ *
+ * The BFS transforms the grid into a "safety map," and the priority-queue search finds the safest possible route through that map.
  */
 
 public class P2812_FindTheSafestPathInAGrid {
