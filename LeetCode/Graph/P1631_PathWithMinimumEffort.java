@@ -19,6 +19,15 @@
  * We apply binary search to evaluate each possible cost. Suppose edge cost equals k.
  * We check whether, with at most k cost, we can reach our destination.
  * If not, we increase the h cost; otherwise, we store it and try for shorter edge cost.
+ *
+ * Binary Search + DFS/BFS
+ *
+ * Guess an effort k.
+ * Check if a path exists using only edges with difference ≤ k.
+ * Feasibility is monotonic:
+ * If k works, any larger effort also works.
+ * If k doesn't work, any smaller effort won't work.
+ * Time: O(m × n × log(MaxHeightDifference))
  */
 
 public class P1631_PathWithMinimumEffort {
