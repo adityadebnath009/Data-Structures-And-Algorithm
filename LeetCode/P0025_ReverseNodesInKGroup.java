@@ -62,3 +62,59 @@ class Solution {
 }
 
 //Approach 2: Iterative ---> O(N), SC - O(1)
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+        ListNode curr = head;
+        ListNode nextNode = null;
+        ListNode prev = null;
+        ListNode prevFirst = null;
+        int count = 0;
+
+        boolean isFirstPass = true;
+
+        while(curr!=null)
+        {
+            count = 0;
+            ListNode first = curr;
+            ListNode temp = curr;
+            prev = null;
+            while(temp!=null && count < k)
+            {
+                temp = temp.next;
+                count++;
+            }
+            if(count < k && prevFirst!=null)
+            {
+                prevFirst.next = curr;
+                break;
+            }
+            count = 0;
+
+            while(curr!=null && count<k)
+            {
+                nextNode = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = nextNode;
+                count++;
+
+            }
+            if(isFirstPass)
+            {
+                head = prev;
+                isFirstPass = false;
+            }
+            else
+            {
+                prevFirst.next = prev;
+
+            }
+            prevFirst = first;
+
+        }
+        return head;
+    }
+
+}
