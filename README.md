@@ -35,15 +35,4 @@ You can use the automation helper script to generate the Java file with the prop
 - Java ☕️
 
 
-## 📈 Progress Tracker
 
-| Topic | Completed Problems | Status |
-| :--- | :--- | :--- |
-| Arrays | 0 | 🟡 In Progress |
-| Linked Lists | 0 | 🔴 Not Started |
-| Trees | 0 | 🔴 Not Started |
-| Graphs | 0 | 🔴 Not Started |
-| Dynamic Programming | 0 | 🔴 Not Started |
-
----
-*Happy Coding! 🚀*
