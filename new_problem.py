@@ -20,6 +20,14 @@ def create_problem():
     platform_choice = input("Enter choice (default 1): ").strip()
     platform = platforms[int(platform_choice) - 1] if platform_choice.isdigit() and 1 <= int(platform_choice) <= len(platforms) else platforms[0]
 
+    # Handle Custom Platform selection
+    if platform == "Other":
+        custom_platform = input("Enter Custom Platform/Folder Name (e.g., Codeforces): ").strip()
+        if custom_platform:
+            platform = to_camel_case(custom_platform)
+        else:
+            platform = "Other"
+
     # Handle DataStructures Category
     if platform == "DataStructures":
         # Select Data Structure Subfolder
@@ -77,6 +85,19 @@ public class {class_name} {{
 
     # Handle standard problem solving platform (LeetCode, HackerRank, etc.)
     else:
+        # Select Data Structure / Topic Category under the Platform
+        categories = ["Array", "LinkedList", "String", "Trees", "Graphs", "DynamicProgramming", "HashTable", "Other"]
+        print("\nSelect Topic / Data Structure Category:")
+        for idx, cat in enumerate(categories, 1):
+            print(f"  {idx}. {cat}")
+        
+        cat_choice = input("Enter choice (default 1): ").strip()
+        if cat_choice == "8":
+            category = input("Enter Custom Category/Topic (e.g., Recursion): ").strip()
+            category = to_camel_case(category) if category else "Other"
+        else:
+            category = categories[int(cat_choice) - 1] if cat_choice.isdigit() and 1 <= int(cat_choice) <= len(categories) else categories[0]
+
         # 2. Problem details
         prob_id = input("\nEnter Problem ID / Number (e.g., 1): ").strip()
         prob_name = input("Enter Problem Name (e.g., Two Sum): ").strip()
@@ -89,7 +110,16 @@ public class {class_name} {{
         diff_choice = input("Enter choice (default 1): ").strip()
         difficulty = difficulties[int(diff_choice) - 1] if diff_choice.isdigit() and 1 <= int(diff_choice) <= len(difficulties) else difficulties[0]
 
-        # 4. Generate Java class name and file name
+        # 4. Ask for Time and Space Complexities
+        tc = input("Enter Time Complexity (e.g., O(N), default O(N)): ").strip()
+        if not tc:
+            tc = "O(N)"
+            
+        sc = input("Enter Space Complexity (e.g., O(1), default O(1)): ").strip()
+        if not sc:
+            sc = "O(1)"
+
+        # 5. Generate Java class name and file name
         camel_name = to_camel_case(prob_name)
         if prob_id.isdigit():
             class_name = f"P{int(prob_id):04d}_{camel_name}"
@@ -99,8 +129,10 @@ public class {class_name} {{
         formatted_name = prob_name.lower().replace(" ", "-")
         problem_url = f"https://leetcode.com/problems/{formatted_name}/" if platform == "LeetCode" else "Link to problem"
 
-        # 5. Define Java content template with Javadoc comments
-        java_content = f"""/**
+        # 6. Define Java content template with Javadoc comments
+        java_content = f"""package {platform}.{category};
+
+/**
  * Platform: {platform}
  * Problem ID: {prob_id}
  * Problem Name: {prob_name}
@@ -109,8 +141,8 @@ public class {class_name} {{
  * Link: {problem_url}
  * 
  * Complexity:
- * - Time Complexity: O(N)
- * - Space Complexity: O(1)
+ * - Time Complexity: {tc}
+ * - Space Complexity: {sc}
  * 
  * Approach:
  * // TODO: Describe your approach here
@@ -126,8 +158,8 @@ public class {class_name} {{
 }}
 """
 
-        # 6. Ensure target directory exists and write file
-        target_dir = platform
+        # 7. Ensure target directory (Platform/Category) exists and write file
+        target_dir = os.path.join(platform, category)
         os.makedirs(target_dir, exist_ok=True)
         
         file_path = os.path.join(target_dir, f"{class_name}.java")
@@ -136,6 +168,7 @@ public class {class_name} {{
             with open(file_path, "w") as f:
                 f.write(java_content)
             print(f"\n✅ Created Java file: {file_path}")
+            print(f"👉 Package: package {platform}.{category};")
             print(f"👉 Class name matches filename: public class {class_name}")
         else:
             print(f"\n⚠️ File already exists at: {file_path}")

@@ -12,6 +12,16 @@
  * 
  * Approach:
  * // TODO: Describe your approach here
+ *
+ * Each row behaves like a sorted list.
+ *
+ * This is exactly the same idea as Merge K Sorted Lists (LC 23):
+ *
+ * Each row is a sorted list.
+ * The heap stores the current smallest element from each row.
+ * When one element is removed, insert the next element from the same row.
+ *
+ * That's why no visited set is needed.
  */
 
 public class P0373_FindKPairsWithSmallestSums {
