@@ -149,3 +149,120 @@ class Solution {
         }
     }
 }
+//TreeMap Approach
+class Solution {
+
+    TreeMap<Integer, Integer> left = new TreeMap<>();
+    TreeMap<Integer, Integer> right = new TreeMap<>();
+
+    int leftSize = 0;
+    int rightSize = 0;
+
+    public double[] medianSlidingWindow(int[] nums, int k) {
+
+        int i = 0;
+        int j = 0;
+        int idx = 0;
+
+        List<Double> ans = new ArrayList<>();
+
+        while (j < nums.length) {
+
+            add(nums[j]);
+
+            if (j - i + 1 == k) {
+
+                ans.add(getMedian());
+
+                remove(nums[i]);
+
+                i++;
+            }
+
+            j++;
+        }
+
+        double[] res = new double[ans.size()];
+
+        for (double x : ans)
+            res[idx++] = x;
+
+        return res;
+    }
+
+    void add(int num) {
+
+        if (left.isEmpty() || num <= left.lastKey()) {
+            insert(left, num);
+            leftSize++;
+        } else {
+            insert(right, num);
+            rightSize++;
+        }
+
+        balance();
+    }
+
+    void remove(int num) {
+
+        if (left.containsKey(num)) {
+            erase(left, num);
+            leftSize--;
+        } else {
+            erase(right, num);
+            rightSize--;
+        }
+
+        balance();
+    }
+
+    void balance() {
+
+        while (leftSize > rightSize + 1) {
+
+            int x = left.lastKey();
+
+            erase(left, x);
+            leftSize--;
+
+            insert(right, x);
+            rightSize++;
+        }
+
+        while (leftSize < rightSize) {
+
+            int x = right.firstKey();
+
+            erase(right, x);
+            rightSize--;
+
+            insert(left, x);
+            leftSize++;
+        }
+    }
+
+    double getMedian() {
+
+        if (leftSize == rightSize) {
+            return ((long) left.lastKey() + (long) right.firstKey()) / 2.0;
+        }
+
+        return (double) left.lastKey();
+    }
+
+    void insert(TreeMap<Integer, Integer> map, int num) {
+
+        map.put(num, map.getOrDefault(num, 0) + 1);
+    }
+
+    void erase(TreeMap<Integer, Integer> map, int num) {
+
+        int freq = map.get(num);
+
+        if (freq == 1) {
+            map.remove(num);
+        } else {
+            map.put(num, freq - 1);
+        }
+    }
+}
