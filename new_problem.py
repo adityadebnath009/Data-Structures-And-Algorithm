@@ -86,13 +86,13 @@ public class {class_name} {{
     # Handle standard problem solving platform (LeetCode, HackerRank, etc.)
     else:
         # Select Data Structure / Topic Category under the Platform
-        categories = ["Array", "LinkedList", "String", "Trees", "Graphs", "DynamicProgramming", "HashTable", "BinaryTree","Other"]
+        categories = ["Array", "LinkedList", "String", "Trees", "Graphs", "DynamicProgramming", "HashTable", "BinaryTree", "Design","Other"]
         print("\nSelect Topic / Data Structure Category:")
         for idx, cat in enumerate(categories, 1):
             print(f"  {idx}. {cat}")
         
         cat_choice = input("Enter choice (default 1): ").strip()
-        if cat_choice == "9":
+        if cat_choice == "10":
             category = input("Enter Custom Category/Topic (e.g., Recursion): ").strip()
             category = to_camel_case(category) if category else "Other"
         else:
