@@ -80,12 +80,14 @@ class Solution {
             int bus_index = p.bus_index;
             int bus_count  = p.bus_count;
 
+            //traverse the stops that are reachable with the current bus
             for(int stop : routes[bus_index])
             {
                 if(stop==target)
                 {
                     return bus_count;
                 }
+                //put the next Bus that you can take from the current stop in the queue
                 for(int nextBus: map.get(stop))
                 {
                     if(!visited.contains(nextBus))
